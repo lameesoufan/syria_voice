@@ -43,12 +43,24 @@ export const submitNewStory = async (payload, contentType = 'application/json', 
 };
 
 export const updateStory = async (id, payload) => {
+  // Ensure update uses multipart/form-data per backend OpenAPI spec
   if (payload instanceof FormData) {
     const res = await client.put(`${STORIES_BASE}/${id}`, payload, { headers: { 'Content-Type': 'multipart/form-data' } });
     return res.data;
   }
-  const res = await client.put(`${STORIES_BASE}/${id}`, payload);
-  return res.data;
+
+  // Convert plain object payload to FormData
+  try {
+    const formData = new FormData();
+    formData.append('story', JSON.stringify(payload));
+    if (payload.file) formData.append('file', payload.file);
+    const res = await client.put(`${STORIES_BASE}/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+    return res.data;
+  } catch (err) {
+    // Fallback to JSON if FormData construction fails
+    const res = await client.put(`${STORIES_BASE}/${id}`, payload);
+    return res.data;
+  }
 };
 
 export const deleteStory = async (id) => {
