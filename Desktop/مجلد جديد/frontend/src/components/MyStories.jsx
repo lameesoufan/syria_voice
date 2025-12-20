@@ -124,7 +124,9 @@ const MyStories = () => {
                                         </td>
 
                                         <td className={styles.storyDate}>
-                                            {story.publishDate ? new Date(story.publishDate).toLocaleDateString() : story.date}
+                                            {story.publishDate ? new Date(story.publishDate).toLocaleDateString()
+                                              : story.updatedAt ? new Date(story.updatedAt).toLocaleDateString()
+                                              : '—'}
                                         </td>
 
                                         <td>
