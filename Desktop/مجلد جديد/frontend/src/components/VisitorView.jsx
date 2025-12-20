@@ -164,23 +164,26 @@ const VisitorView = ({ onLogin }) => {
                 <div className={styles.cardHeader}>
                   {renderTypeBadge(story.type)}
                   <span className={styles.date}>
-                    <FiClock /> {story.date}
+                    <FiClock /> {story.publishDate ? new Date(story.publishDate).toLocaleDateString()
+                      : story.updatedAt ? new Date(story.updatedAt).toLocaleDateString()
+                      : '—'}
                   </span>
                 </div>
                 <h3>{story.title}</h3>
-                <p className={styles.summary}>{story.summary || 'No summary available.'}</p> 
+                <p className={styles.summary}>{story.textContent ? (story.textContent.length > 180 ? `${story.textContent.slice(0,180)}...` : story.textContent) : 'No summary available.'}</p>
                 <div className={styles.meta}>
                   <span>
   <FiMapPin /> {PROVINCES_MAP[story.province] || story.province || 'Unknown location'}
 </span>
                 </div>
-                <div className={styles.tags}>
-                  {story.tags && story.tags.map((tag) => ( 
-                    <span key={tag} className={styles.tag}>
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
+                {/* Tags are not defined in backend OpenAPI schema; render only if backend provides them. */}
+                {Array.isArray(story.tags) && story.tags.length > 0 && (
+                  <div className={styles.tags}>
+                    {story.tags.map((tag) => (
+                      <span key={tag} className={styles.tag}>#{tag}</span>
+                    ))}
+                  </div>
+                )}
                 <button
                   className={styles.viewBtn}
                   style={{
