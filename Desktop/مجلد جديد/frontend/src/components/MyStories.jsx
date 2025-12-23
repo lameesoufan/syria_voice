@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import useMyStories from '../hooks/useMyStories';
 import { 
     FiEdit3, FiTrash2, FiEye, FiFileText, 
-    FiMic, FiVideo, FiCheck, FiClock, FiX 
+    FiMic, FiVideo, FiCheck, FiClock, FiX, FiAlertCircle 
 } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import styles from './MyStories.module.css'; // تأكدي من الاستيراد من الملف الجديد
@@ -95,6 +95,7 @@ const MyStories = () => {
                                 <th>Story Title</th>
                                 <th>Type</th>
                                 <th>Status</th>
+                                <th>Admin Message</th>
                                 <th>Date</th>
                                 <th style={{textAlign: 'right'}}>Actions</th>
                             </tr>
@@ -121,6 +122,17 @@ const MyStories = () => {
                                                 {statusMeta.icon}
                                                 <span>{story.status}</span>
                                             </div>
+                                        </td>
+
+                                        <td>
+                                            {story.adminMessage ? (
+                                                <div className={styles.adminMessageCell}>
+                                                    <FiAlertCircle className={styles.messageIcon} />
+                                                    <span className={styles.messageText}>{story.adminMessage}</span>
+                                                </div>
+                                            ) : (
+                                                <span className={styles.noMessage}>—</span>
+                                            )}
                                         </td>
 
                                         <td className={styles.storyDate}>
