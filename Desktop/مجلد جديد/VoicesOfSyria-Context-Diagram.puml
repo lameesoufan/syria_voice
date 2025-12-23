@@ -1,0 +1,102 @@
+@startuml VoicesOfSyria Context Diagram
+!define RECTANGLE class
+
+skinparam backgroundColor #FEFEFE
+skinparam roundcorner 20
+skinparam shadowing false
+
+' Define colors
+skinparam actor {
+  BackgroundColor #E8F4F8
+  BorderColor #2C5F7C
+}
+
+skinparam component {
+  BackgroundColor #4A90E2
+  BorderColor #2C5F7C
+  FontColor #FFFFFF
+  FontSize 14
+  FontStyle bold
+}
+
+skinparam database {
+  BackgroundColor #F5A623
+  BorderColor #D68910
+  FontColor #FFFFFF
+}
+
+skinparam cloud {
+  BackgroundColor #E8F4F8
+  BorderColor #2C5F7C
+}
+
+title Voices of Syria - System Context Diagram (High Level)
+
+' External Actors
+actor "Visitor\n(Public User)" as Visitor #LightBlue
+actor "Publisher\n(Registered User)" as Publisher #LightGreen
+actor "Admin\n(Content Moderator)" as Admin #LightCoral
+actor "Super Admin\n(System Manager)" as SuperAdmin #LightPink
+
+' Main System
+component "Voices of Syria\nBackend System\n(Spring Boot)" as System #4A90E2
+
+' External Systems
+database "H2 Database\n(In-Memory)" as DB #F5A623
+cloud "Email Service\n(Verification)" as Email #E8F4F8
+cloud "File Storage\n(Media Files)" as Storage #E8F4F8
+
+' Visitor interactions
+Visitor --> System : View approved stories\n(TEXT/AUDIO/VIDEO)
+Visitor --> System : Browse by province
+Visitor --> System : View story details
+
+' Publisher interactions
+Publisher --> System : Register & verify email
+Publisher --> System : Login with credentials
+Publisher --> System : Submit stories\n(TEXT/AUDIO/VIDEO)
+Publisher --> System : View my stories
+Publisher --> System : Edit/Delete stories
+Publisher --> System : Update profile & avatar
+Publisher --> System : View admin feedback
+
+' Admin interactions
+Admin --> System : Login with credentials
+Admin --> System : View pending stories
+Admin --> System : Approve stories
+Admin --> System : Reject stories
+Admin --> System : Request modifications\n(with message)
+
+' Super Admin interactions
+SuperAdmin --> System : Login with credentials
+SuperAdmin --> System : Create new admins
+SuperAdmin --> System : View all admins
+SuperAdmin --> System : Delete admins
+
+' System interactions with external services
+System --> DB : Store/Retrieve\nUsers, Stories, Metadata
+System --> Email : Send verification codes
+System --> Storage : Store/Retrieve\nAudio & Video files
+
+' Notes
+note right of System
+  **Core Features:**
+  • JWT Authentication
+  • Role-based access (USER/ADMIN/SUPER_ADMIN)
+  • Story management (TEXT/AUDIO/VIDEO)
+  • Content moderation workflow
+  • Province-based categorization
+  • Email verification
+  • Token refresh mechanism
+end note
+
+note bottom of DB
+  **Data Entities:**
+  • Users (with roles)
+  • Stories (with status)
+  • Provinces (12 regions)
+  • Verification codes
+  • Admin messages
+end note
+
+@enduml

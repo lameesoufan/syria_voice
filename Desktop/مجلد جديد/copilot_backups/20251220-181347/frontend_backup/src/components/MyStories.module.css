@@ -1,0 +1,187 @@
+/* Container: بطاقة عائمة أنيقة */
+.container {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    padding: 30px;
+    border: 1px solid rgba(0,0,0,0.03);
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header Section */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.title h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #2d3748;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.stats {
+    font-size: 0.9rem;
+    color: #718096;
+    font-weight: 500;
+}
+
+/* Table Styling */
+.tableWrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: separate; /* مهم جداً للفراغات */
+    border-spacing: 0 8px; /* مسافة بين الصفوف */
+}
+
+.table th {
+    text-align: left;
+    padding: 15px 20px;
+    color: #a0aec0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Rows: الصفوف */
+.table tbody tr {
+    background: #ffffff;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.table tbody tr:hover {
+    transform: scale(1.005) translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    z-index: 10;
+    position: relative;
+}
+
+.table td {
+    padding: 20px;
+    vertical-align: middle;
+    border-top: 1px solid #edf2f7;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.table td:first-child {
+    border-left: 1px solid #edf2f7;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.table td:last-child {
+    border-right: 1px solid #edf2f7;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Typography in Cells */
+.storyTitle {
+    font-weight: 700;
+    color: #2d3748;
+    font-size: 1rem;
+}
+
+.storyDate {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    font-weight: 500;
+}
+
+/* Type Badge */
+.typeBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+/* ألوان الأنواع */
+.typeText { background: #ebf8ff; color: #3182ce; }
+.typeAudio { background: #f0fff4; color: #38a169; }
+.typeVideo { background: #fff5f5; color: #e53e3e; }
+
+/* Status Badge */
+.statusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.statusApproved { background: rgba(72, 187, 120, 0.1); color: #48bb78; }
+.statusPending { background: rgba(237, 137, 54, 0.1); color: #ed8936; }
+.statusRejected { background: rgba(245, 101, 101, 0.1); color: #f56565; }
+
+/* ---------------------------------- */
+/* 🎨 THE PRO BUTTONS (الجزء الأهم) */
+/* ---------------------------------- */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actionBtn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+}
+
+/* Edit Button: Blue Soft */
+.btnEdit {
+    background: #ebf8ff;
+    color: #3182ce;
+}
+.btnEdit:hover {
+    background: #3182ce;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+}
+
+/* Delete Button: Red Soft */
+.btnDelete {
+    background: #fff5f5;
+    color: #e53e3e;
+}
+.btnDelete:hover {
+    background: #e53e3e;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+}
+
+/* View Button: Gray Soft */
+.btnView {
+    background: #f7fafc;
+    color: #718096;
+}
+.btnView:hover {
+    background: #4a5568;
+    color: #ffffff;
+}

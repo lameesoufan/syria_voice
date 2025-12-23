@@ -1,0 +1,129 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="5.0" version="22.1.0" etag="drawio-context" type="device">
+  <diagram name="Context Diagram" id="context-diagram">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Voices of Syria - System Context Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="500" y="40" width="600" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Central System -->
+        <mxCell id="system" value="&lt;b&gt;Voices of Syria&lt;/b&gt;&lt;br&gt;Backend System&lt;br&gt;(Spring Boot)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4A90E2;strokeColor=#2C5F7C;fontSize=16;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="650" y="450" width="300" height="150" as="geometry" />
+        </mxCell>
+        
+        <!-- Visitor Actor -->
+        <mxCell id="visitor" value="&lt;b&gt;Visitor&lt;/b&gt;&lt;br&gt;(Public User)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#E8F4F8;strokeColor=#2C5F7C;" vertex="1" parent="1">
+          <mxGeometry x="150" y="200" width="60" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Publisher Actor -->
+        <mxCell id="publisher" value="&lt;b&gt;Publisher&lt;/b&gt;&lt;br&gt;(Registered User)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#D5E8D4;strokeColor=#82B366;" vertex="1" parent="1">
+          <mxGeometry x="150" y="450" width="60" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Admin Actor -->
+        <mxCell id="admin" value="&lt;b&gt;Admin&lt;/b&gt;&lt;br&gt;(Content Moderator)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#F8CECC;strokeColor=#B85450;" vertex="1" parent="1">
+          <mxGeometry x="150" y="700" width="60" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Super Admin Actor -->
+        <mxCell id="superadmin" value="&lt;b&gt;Super Admin&lt;/b&gt;&lt;br&gt;(System Manager)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="450" width="60" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Database -->
+        <mxCell id="database" value="&lt;b&gt;H2 Database&lt;/b&gt;&lt;br&gt;(In-Memory)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#F5A623;strokeColor=#D68910;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="750" y="800" width="100" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Email Service -->
+        <mxCell id="email" value="&lt;b&gt;Email Service&lt;/b&gt;&lt;br&gt;(Verification)" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#E8F4F8;strokeColor=#2C5F7C;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="250" width="180" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- File Storage -->
+        <mxCell id="storage" value="&lt;b&gt;File Storage&lt;/b&gt;&lt;br&gt;(Media Files)" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#E8F4F8;strokeColor=#2C5F7C;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="650" width="180" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Visitor Connections -->
+        <mxCell id="visitor-conn1" value="View approved stories" style="endArrow=classic;html=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="visitor" target="system">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="500" as="sourcePoint" />
+            <mxPoint x="450" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Publisher Connections -->
+        <mxCell id="pub-conn1" value="Register &amp; Login" style="endArrow=classic;html=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="publisher" target="system">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="500" as="sourcePoint" />
+            <mxPoint x="450" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="pub-conn2" value="Submit/Edit stories" style="endArrow=classic;html=1;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="publisher" target="system">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="500" as="sourcePoint" />
+            <mxPoint x="450" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Admin Connections -->
+        <mxCell id="admin-conn1" value="Review &amp; Moderate" style="endArrow=classic;html=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="admin" target="system">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="700" as="sourcePoint" />
+            <mxPoint x="450" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Super Admin Connections -->
+        <mxCell id="sa-conn1" value="Manage Admins" style="endArrow=classic;html=1;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="superadmin" target="system">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1200" y="500" as="sourcePoint" />
+            <mxPoint x="1250" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- System to Database -->
+        <mxCell id="sys-db" value="Store/Retrieve Data" style="endArrow=classic;startArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="system" target="database">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="700" y="700" as="sourcePoint" />
+            <mxPoint x="750" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- System to Email -->
+        <mxCell id="sys-email" value="Send verification codes" style="endArrow=classic;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="system" target="email">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="900" y="400" as="sourcePoint" />
+            <mxPoint x="950" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- System to Storage -->
+        <mxCell id="sys-storage" value="Store/Retrieve media" style="endArrow=classic;startArrow=classic;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="system" target="storage">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="900" y="600" as="sourcePoint" />
+            <mxPoint x="950" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- System Features Note -->
+        <mxCell id="note1" value="&lt;b&gt;Core Features:&lt;/b&gt;&lt;br&gt;• JWT Authentication&lt;br&gt;• Role-based access&lt;br&gt;• Story management&lt;br&gt;• Content moderation&lt;br&gt;• Province categorization&lt;br&gt;• Email verification" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#FFF9E6;strokeColor=#D6B656;align=left;verticalAlign=top;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="350" y="250" width="200" height="150" as="geometry" />
+        </mxCell>
+        
+        <!-- Database Note -->
+        <mxCell id="note2" value="&lt;b&gt;Data Entities:&lt;/b&gt;&lt;br&gt;• Users (with roles)&lt;br&gt;• Stories (with status)&lt;br&gt;• Provinces (12 regions)&lt;br&gt;• Verification codes&lt;br&gt;• Admin messages" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#FFF9E6;strokeColor=#D6B656;align=left;verticalAlign=top;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="900" y="850" width="200" height="130" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

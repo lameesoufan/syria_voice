@@ -1,0 +1,151 @@
+@startuml Account Management Architecture Diagram
+
+title Account Management System Architecture
+
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam component {
+    BackgroundColor #F8F8F8
+    BorderColor #333333
+    BorderThickness 2
+}
+
+package "Presentation Layer" as PL {
+    component [AuthController] as AuthCtrl {
+        + POST /auth/register
+        + POST /auth/verify
+        + POST /auth/login
+        + POST /auth/refresh-token
+    }
+
+    component [SuperAdminController] as SuperAdminCtrl {
+        + POST /super-admin/admins
+        + DELETE /super-admin/admins/{id}
+        + GET /super-admin/admins
+    }
+}
+
+package "Service Layer" as SL {
+    component [AuthService] as AuthSvc {
+        + login()
+        + refreshToken()
+    }
+
+    component [UserService] as UserSvc {
+        + register()
+        + verifyEmail()
+        - sendVerificationEmail()
+    }
+
+    component [AdminManagementService] as AdminMgmtSvc {
+        + createAdmin()
+        + deleteAdmin()
+        + getAllAdmins()
+        - validateSuperAdminAccess()
+    }
+
+    component [JwtService] as JwtSvc {
+        + generateAccessToken()
+        + generateRefreshToken()
+        + isTokenValid()
+        + extractUsername()
+    }
+
+    component [UserDetailsServiceImpl] as UserDetailsSvc {
+        + loadUserByUsername()
+    }
+}
+
+package "Repository Layer" as RL {
+    component [UserRepo] as UserRepo {
+        + findByEmail()
+        + findById()
+        + findByRole()
+        + save()
+        + delete()
+    }
+}
+
+package "Infrastructure Layer" as IL {
+    database "Database\n(Users Table)" as DB {
+        id : Long
+        name : String
+        email : String (unique)
+        password : String (encrypted)
+        verified : boolean
+        verificationCode : String
+        profileImageUrl : String
+        role : UserRole (USER/ADMIN/SUPER_ADMIN)
+    }
+
+    component [JavaMailSender] as EmailSvc {
+        + send()
+    }
+
+    component [Spring Security] as Security {
+        + AuthenticationManager
+        + PasswordEncoder (BCrypt)
+        + JWT Authentication Filter
+    }
+}
+
+' Relationships
+AuthCtrl --> AuthSvc : uses
+AuthCtrl --> UserSvc : uses
+SuperAdminCtrl --> AdminMgmtSvc : uses
+
+AuthSvc --> JwtSvc : generates tokens
+AuthSvc --> UserDetailsSvc : loads user details
+AuthSvc --> UserRepo : validates user
+
+UserSvc --> UserRepo : saves user
+UserSvc --> EmailSvc : sends verification emails
+
+AdminMgmtSvc --> UserRepo : manages admin users
+AdminMgmtSvc --> Security : validates permissions
+
+JwtSvc --> Security : uses encryption
+
+UserDetailsSvc --> UserRepo : loads user data
+
+UserRepo --> DB : persists data
+
+' Security Flow
+Security --> JwtSvc : validates tokens
+Security --> UserDetailsSvc : authenticates users
+
+' Email Flow
+UserSvc --> EmailSvc : verification codes
+
+note right of AuthSvc
+    Handles login and token refresh
+    Validates user credentials
+    Generates JWT tokens
+end note
+
+note right of UserSvc
+    Manages user registration
+    Handles email verification
+    Generates verification codes
+end note
+
+note right of AdminMgmtSvc
+    Super Admin only operations
+    Creates/deletes admin accounts
+    Lists all admin users
+end note
+
+note right of JwtSvc
+    Generates access and refresh tokens
+    Validates token signatures
+    Extracts user information from tokens
+end note
+
+note bottom of Security
+    Role-based access control
+    USER, ADMIN, SUPER_ADMIN roles
+    Password encryption with BCrypt
+    JWT token authentication
+end note
+
+@enduml

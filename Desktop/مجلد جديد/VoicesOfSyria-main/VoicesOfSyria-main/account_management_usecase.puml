@@ -1,0 +1,65 @@
+@startuml Account Management Use Case Diagram
+
+left to right direction
+
+actor "Regular User" as User
+actor "Admin" as Admin
+actor "Super Admin" as SuperAdmin
+actor "Email System" as EmailSystem
+
+rectangle "Account Management System" {
+    usecase "Register Account" as UC1
+    usecase "Verify Email" as UC2
+    usecase "Login" as UC3
+    usecase "Refresh Token" as UC4
+    usecase "Create Admin Account" as UC5
+    usecase "Delete Admin Account" as UC6
+    usecase "View All Admins" as UC7
+}
+
+User --> UC1 : requests registration
+User --> UC2 : verifies email
+User --> UC3 : logs in
+User --> UC4 : refreshes token
+
+SuperAdmin --> UC5 : creates admin accounts
+SuperAdmin --> UC6 : deletes admin accounts
+SuperAdmin --> UC7 : views admin list
+
+UC1 --> EmailSystem : sends verification code
+UC2 --> EmailSystem : receives verification code
+
+note right of UC1
+    User provides: name, email, password
+    System sends 6-digit verification code
+end note
+
+note right of UC2
+    User enters verification code
+    Account becomes verified and active
+end note
+
+note right of UC3
+    User provides email and password
+    System returns access and refresh tokens
+end note
+
+note right of UC4
+    User provides refresh token
+    System returns new access and refresh tokens
+end note
+
+note right of UC5
+    Super Admin creates new Admin account
+    Admin is automatically verified
+end note
+
+note right of UC6
+    Super Admin deletes existing Admin account
+end note
+
+note right of UC7
+    Super Admin views list of all Admin accounts
+end note
+
+@enduml
